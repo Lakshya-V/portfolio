@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lakshya V - B.Tech CSE Student at VIT Vellore | AI & Robotics Enthusiast">
+    <title>Lakshya V - Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00BFA5',
+                        accent: '#1976D2',
+                    },
+                    fontFamily: {
+                        'heading': ['Montserrat', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Rotating Skills Animation */
+        @keyframes rotateSkills {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .skill-orbit {
+            animation: rotateSkills 20s linear infinite;
+        }
+        
+        .skill-orbit-reverse {
+            animation: rotateSkills 25s linear infinite reverse;
+        }
+        
+        .skill-orbit-slow {
+            animation: rotateSkills 30s linear infinite;
+        }
+        
+        /* Keep badges upright while orbiting */
+        @keyframes counterRotate20 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        @keyframes counterRotate25 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        @keyframes counterRotate30 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        .skill-orbit .skill-badge {
+            animation: counterRotate20 20s linear infinite;
+        }
+        
+        .skill-orbit-reverse .skill-badge {
+            animation: counterRotate25 25s linear infinite reverse;
+        }
+        
+        .skill-orbit-slow .skill-badge {
+            animation: counterRotate30 30s linear infinite;
+        }
+
+        /* Hero background animation */
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+        
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(-25px, 25px); }
+            66% { transform: translate(35px, -15px); }
+        }
+        
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(20px, 30px); }
+            66% { transform: translate(-30px, -20px); }
+        }
+
+        .hero-orb1 {
+            animation: float1 12s ease-in-out infinite;
+        }
+        
+        .hero-orb2 {
+            animation: float2 15s ease-in-out infinite;
+        }
+        
+        .hero-orb3 {
+            animation: float3 18s ease-in-out infinite;
+        }
+
+        /* Smooth mobile menu */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-body">
+    
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-black/95 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-2xl font-bold font-heading text-primary">
+                    Lakshya Vats
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-primary transition font-heading">Home</a>
+                    <a href="#about" class="hover:text-primary transition font-heading">About</a>
+                    <a href="#skills" class="hover:text-primary transition font-heading">Skills</a>
+                    <a href="#projects" class="hover:text-primary transition font-heading">Projects</a>
+                    <a href="#contact" class="hover:text-primary transition font-heading">Contact</a>
+                </div>
+                
+                <a href="resume.pdf" download class="hidden md:block px-6 py-2 bg-primary text-black font-heading font-semibold rounded-md hover:bg-accent hover:text-white transition">
+                    Resume
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-primary" onclick="toggleMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu md:hidden pb-4">
+                <a href="#home" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Home</a>
+                <a href="#about" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">About</a>
+                <a href="#skills" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Skills</a>
+                <a href="#projects" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Projects</a>
+                <a href="#contact" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Contact</a>
+                <a href="resume.pdf" download class="block py-2 text-primary">Download Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
+        <!-- Animated Background Orbs -->
+        <div class="absolute inset-0 -z-10">
+            <div class="hero-orb1 absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-xl"></div>
+            <div class="hero-orb2 absolute top-1/2 right-20 w-72 h-72 bg-accent/10 rounded-full blur-xl"></div>
+            <div class="hero-orb3 absolute -bottom-32 left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-xl"></div>
+        </div>
+        
+        <div class="text-center max-w-4xl mx-auto relative z-10">
+            <!-- Profile Picture -->
+            <div class="mb-8 py-8">
+                <div class="w-40 h-40 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center overflow-hidden shadow-2xl shadow-primary/50 border-2 border-primary/30">
+                    <img src="images\profile.png" class="w-full h-full object-cover" alt="Lakshya V">
+                </div>
+            </div>
+            
+            <h1 class="text-3xl md:text-6xl font-bold font-heading mb-4 text-white">
+                Hi, I'm <span class="text-primary">Lakshya Vats</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-400 mb-8 font-body">
+                B.Tech CSE @ VIT Vellore | AI & Robotics Enthusiast
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 py-10 justify-center">
+                <a href="#projects" class="px-8 py-3 border-2 border-primary text-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-black transition">
+                    View Projects
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-primary text-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-black transition">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-12 text-primary">
+                About Me
+            </h2>
+            
+            <div class="bg-gray-800 rounded-lg p-8 border border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    I'm a B.Tech Computer Science student at VIT Vellore with a passion for Artificial Intelligence and Robotics. 
+                    I love building practical solutions using technology and am constantly learning new skills to expand my capabilities.
+                </p>
+                
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    My journey in tech started with curiosity about how things work, and has evolved into building full-stack applications, 
+                    exploring AI/ML concepts, and working on robotics projects. I'm particularly interested in how to combine AI/ML withRobotics
+                    and make innovative solutions.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-black p-6 rounded-lg border border-primary/30">
+                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary">🎓 Education</h3>
+                        <p class="text-gray-300 font-semibold">B.Tech in Computer Science</p>
+                        <p class="text-gray-400 text-sm">VIT Vellore</p>
+                        <p class="text-gray-500 text-sm mt-2 py-1">2025 - 2029</p>
+                        <p class="text-gray-300 font-semibold">Higher Secondary(CBSE)</p>
+                        <p class="text-gray-400 text-sm">Delhi Public School</p>
+                        <p class="text-gray-500 text-sm mt-2">2024</p>
+                    </div>
+                    
+                    <div class="bg-black p-6 rounded-lg border border-primary/30">
+                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary">🎯 Experience</h3>
+                        <p class="text-gray-300 font-semibold">RoboVITics (Tech Junior Core)</p>
+                        <p class="text-gray-400 text-sm">AI/ML Core</p>
+                        <p class="text-gray-500 text-sm mt-2 py-1">2025 March</p>
+                        <p class="text-gray-300 font-semibold">TAM The AI/ML Club(Tech Junior Core)</p>
+                        <p class="text-gray-400 text-sm ">AI/ML Core</p>
+                        <p class="text-gray-500 text-sm mt-2">2025 January</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="py-5">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary">
+                Technical Skills
+            </h2>
+            </div>
+            <!-- Rotating Concentric Skills Circles -->
+            <div class="relative w-64 h-64 mx-auto mb-12 max-w-full">
+                <!-- Center -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary rounded-full flex items-center justify-center z-20 shadow-lg shadow-primary/50">
+                    <span class="text-black font-heading font-bold text-sm">Skills</span>
+                </div>
+                
+                <!-- Inner Circle -->
+                <div class="skill-orbit absolute top-1/2 left-1/2 w-32 h-32 border-2 border-primary/40 rounded-full">
+                    <div class="skill-badge absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-primary text-black rounded-full text-xs font-semibold shadow-lg">Python</span>
+                    </div>
+                    <div class="skill-badge absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-primary text-black rounded-full text-xs font-semibold shadow-lg">Django</span>
+                    </div>
+                </div>
+                
+                <!-- Middle Circle -->
+                <div class="skill-orbit-reverse absolute top-1/2 left-1/2 w-48 h-48 border-2 border-accent/30 rounded-full">
+                    <div class="skill-badge absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">React</span>
+                    </div>
+                    <div class="skill-badge absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">AI/ML</span>
+                    </div>
+                    <div class="skill-badge absolute top-1/2 -left-4 transform -translate-y-1/2">
+                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">C</span>
+                    </div>
+                    <div class="skill-badge absolute top-1/2 -right-4 transform -translate-y-1/2">
+                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">Git</span>
+                    </div>
+                </div>
+                
+                <!-- Outer Circle -->
+                <div class="skill-orbit-slow absolute top-1/2 left-1/2 w-64 h-64 border-2 border-primary/20 rounded-full">
+                    <div class="skill-badge absolute -top-5 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">JavaScript</span>
+                    </div>
+                    <div class="skill-badge absolute -bottom-5 left-1/2 transform -translate-x-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">CSS</span>
+                    </div>
+                    <div class="skill-badge absolute top-1/4 -left-8 transform -translate-y-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">SQL</span>
+                    </div>
+                    <div class="skill-badge absolute top-1/4 -right-8 transform -translate-y-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">HTML</span>
+                    </div>
+                    <div class="skill-badge absolute bottom-1/4 -left-10 transform translate-y-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">C++</span>
+                    </div>
+                    <div class="skill-badge absolute bottom-1/4 -right-10 transform translate-y-1/2">
+                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-gray-400 mb-12">Technologies and tools I work with</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Frontend -->
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Frontend Development</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> React.js</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> HTML & CSS</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Tailwind CSS</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Bootstrap</li>
+                    </ul>
+                </div>
+
+                <!-- Backend -->
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Backend Development</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Python</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Django</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> SQL</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> C Programming</li>
+                    </ul>
+                </div>
+
+                <!-- Tools -->
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                    <div class="text-4xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Tools & Technologies</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Git & GitHub</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> AI/ML Basics</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Data Structures (C)</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Linux/Terminal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary">
+                Featured Projects
+            </h2>
+            <p class="text-center text-gray-400 mb-12">Some things I've built recently</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 - Replace with your project -->
+                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                        🧠
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Alferd - Voice - Asistant</h3>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            A versatile, open-source voice assistant designed to simplify user interactions and boost productivity with hands-free computing. Alferd is a modular, voice-controlled desktop assistant for Windows. It can automate apps, control system settings, fetch news, play music, take notes, and much more—all with your voice.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Python</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/Lakshya-V/Alferd-Assistant" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                        📕
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Rack-Track</h3>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            A modern Library Management System built with Python.Rack-Track is a small local library inventory app: a PyQt5 desktop UI with an SQLite backend. Use it to track books, clients and simple loans locally. The project is intentionally minimal so it's easy to run and extend.  
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Python</span>
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">SQL</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/Lakshya-V/Rack-Track" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                        🤖
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Vent-Vyom</h3>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            Still Cooking.....
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Django</span>
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">HTML/CSS</span>
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">SQL</span>
+                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">JavaScript</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/Lakshya-V/Vent-Vyom" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more projects here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary">
+                Get In Touch
+            </h2>
+            <p class="text-gray-400 mb-12">Have a question or want to work together?</p>
+            
+            <div class="flex flex-wrap justify-center gap-8 mb-12">
+                <!-- Email -->
+                <a href="mailto:lakshyavats11@gmail.com" class="flex flex-col items-center gap-3 group">
+                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                        📧
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">Email</p>
+                        <p class="text-primary group-hover:text-accent transition">Contact</p>
+                    </div>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/lakshya-v/" target="_blank" class="flex flex-col items-center gap-3 group">
+                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                        💼
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">LinkedIn</p>
+                        <p class="text-primary group-hover:text-accent transition">Connect</p>
+                    </div>
+                </a>
+                
+                <!-- GitHub -->
+                <a href="https://github.com/Lakshya-v" target="_blank" class="flex flex-col items-center gap-3 group">
+                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                        💻
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm">GitHub</p>
+                        <p class="text-primary group-hover:text-accent transition">Follow</p>
+                    </div>
+                </a>
+            </div>
+
+            <p class="text-gray-500 text-sm">Feel free to reach out for collaborations or just a friendly conversation!!</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 px-4 border-t border-gray-800 bg-gray-900">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-400">Copyright © 2026 Lakshya Vats | Built with HTML, Tailwind CSS & AI assistance.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const menu = document.querySelector('.mobile-menu');
+            const button = event.target.closest('button');
+            
+            if (!nav.contains(event.target) || (nav.contains(event.target) && !button && menu.classList.contains('active'))) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
