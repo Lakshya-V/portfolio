@@ -18,11 +18,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#00BFA5',
-                        accent: '#1976D2',
+                        primary: '#0ea5e9',
+                        accent: '#8b5cf6',
+                        background: '#f8fafc',
+                        surface: '#ffffff',
+                        'text-primary': '#1e293b',
+                        'text-secondary': '#64748b',
+                        border: '#e2e8f0',
+                        footer: '#1e293b',
+                        // Dark mode colors
+                        'dark-primary': '#00BFA5',
+                        'dark-accent': '#1976D2',
+                        'dark-background': '#000000',
+                        'dark-surface': '#111111',
+                        'dark-text-primary': '#ffffff',
+                        'dark-text-secondary': '#9ca3af',
+                        'dark-border': '#374151',
+                        'dark-footer': '#111111',
                     },
                     fontFamily: {
                         'heading': ['Montserrat', 'sans-serif'],
@@ -122,31 +138,41 @@
         }
     </style>
 </head>
-<body class="bg-black text-white font-body">
+<body class="bg-background text-text-primary font-body dark:bg-dark-background dark:text-dark-text-primary transition-colors duration-300">
     
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full bg-black/95 backdrop-blur-md z-50 border-b border-gray-800">
+    <nav class="fixed top-0 w-full bg-surface/95 backdrop-blur-md z-50 border-b border-border shadow-sm dark:bg-dark-surface/95 dark:border-dark-border transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="text-2xl font-bold font-heading text-primary">
+                <div class="text-2xl font-bold font-heading text-primary dark:text-dark-primary">
                     Lakshya Vats
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-primary transition font-heading">Home</a>
-                    <a href="#about" class="hover:text-primary transition font-heading">About</a>
-                    <a href="#skills" class="hover:text-primary transition font-heading">Skills</a>
-                    <a href="#projects" class="hover:text-primary transition font-heading">Projects</a>
-                    <a href="#contact" class="hover:text-primary transition font-heading">Contact</a>
+                    <a href="#home" class="hover:text-primary transition font-heading text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary">Home</a>
+                    <a href="#about" class="hover:text-primary transition font-heading text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary">About</a>
+                    <a href="#skills" class="hover:text-primary transition font-heading text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary">Skills</a>
+                    <a href="#projects" class="hover:text-primary transition font-heading text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary">Projects</a>
+                    <a href="#contact" class="hover:text-primary transition font-heading text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary">Contact</a>
                 </div>
                 
-                <a href="resume.pdf" download class="hidden md:block px-6 py-2 bg-primary text-black font-heading font-semibold rounded-md hover:bg-accent hover:text-white transition">
+                <a href="resume.pdf" download class="hidden md:block px-6 py-2 bg-primary text-white font-heading font-semibold rounded-md hover:bg-primary/90 transition shadow-sm dark:bg-dark-primary dark:hover:bg-dark-primary/90">
                     Resume
                 </a>
 
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="hidden md:block p-2 rounded-md hover:bg-border transition ml-4 dark:hover:bg-dark-border" onclick="toggleTheme()">
+                    <svg id="sun-icon" class="w-6 h-6 text-text-primary dark:text-dark-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-6 h-6 text-text-primary dark:text-dark-text-primary hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden text-primary" onclick="toggleMenu()">
+                <button class="md:hidden text-primary dark:text-dark-primary" onclick="toggleMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -155,12 +181,15 @@
 
             <!-- Mobile Menu -->
             <div class="mobile-menu md:hidden pb-4">
-                <a href="#home" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Home</a>
-                <a href="#about" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">About</a>
-                <a href="#skills" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Skills</a>
-                <a href="#projects" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Projects</a>
-                <a href="#contact" class="block py-2 hover:text-primary transition" onclick="toggleMenu()">Contact</a>
-                <a href="resume.pdf" download class="block py-2 text-primary">Download Resume</a>
+                <a href="#home" class="block py-2 hover:text-primary transition text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary" onclick="toggleMenu()">Home</a>
+                <a href="#about" class="block py-2 hover:text-primary transition text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary" onclick="toggleMenu()">About</a>
+                <a href="#skills" class="block py-2 hover:text-primary transition text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary" onclick="toggleMenu()">Skills</a>
+                <a href="#projects" class="block py-2 hover:text-primary transition text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary" onclick="toggleMenu()">Projects</a>
+                <a href="#contact" class="block py-2 hover:text-primary transition text-text-primary dark:text-dark-text-primary dark:hover:text-dark-primary" onclick="toggleMenu()">Contact</a>
+                <a href="resume.pdf" download class="block py-2 text-primary dark:text-dark-primary">Download Resume</a>
+                <button class="block py-2 text-text-primary dark:text-dark-text-primary hover:text-primary dark:hover:text-dark-primary transition" onclick="toggleTheme()">
+                    <span id="mobile-theme-text">Dark Mode</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -169,32 +198,32 @@
     <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
         <!-- Animated Background Orbs -->
         <div class="absolute inset-0 -z-10">
-            <div class="hero-orb1 absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-xl"></div>
-            <div class="hero-orb2 absolute top-1/2 right-20 w-72 h-72 bg-accent/10 rounded-full blur-xl"></div>
-            <div class="hero-orb3 absolute -bottom-32 left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-xl"></div>
+            <div class="hero-orb1 absolute top-20 left-10 w-64 h-64 bg-primary/15 dark:bg-dark-primary/10 rounded-full blur-xl"></div>
+            <div class="hero-orb2 absolute top-1/2 right-20 w-72 h-72 bg-accent/15 dark:bg-dark-accent/10 rounded-full blur-xl"></div>
+            <div class="hero-orb3 absolute -bottom-32 left-1/2 w-96 h-96 bg-primary/10 dark:bg-dark-primary/5 rounded-full blur-xl"></div>
         </div>
         
         <div class="text-center max-w-4xl mx-auto relative z-10">
             <!-- Profile Picture -->
             <div class="mb-8 py-8">
-                <div class="w-40 h-40 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center overflow-hidden shadow-2xl shadow-primary/50 border-2 border-primary/30">
+                <div class="w-40 h-40 mx-auto bg-gradient-to-br from-primary to-accent dark:from-dark-primary dark:to-dark-accent rounded-full flex items-center justify-center overflow-hidden shadow-2xl shadow-primary/20 dark:shadow-dark-primary/20 border-2 border-primary/20 dark:border-dark-primary/20">
                     <img src="images\profile.png" class="w-full h-full object-cover" alt="Lakshya V">
                 </div>
             </div>
             
-            <h1 class="text-3xl md:text-6xl font-bold font-heading mb-4 text-white">
-                Hi, I'm <span class="text-primary">Lakshya Vats</span>
+            <h1 class="text-3xl md:text-6xl font-bold font-heading mb-4 text-text-primary dark:text-dark-text-primary">
+                Hi, I'm <span class="text-primary dark:text-dark-primary">Lakshya Vats</span>
             </h1>
             
-            <p class="text-lg md:text-xl text-gray-400 mb-8 font-body">
+            <p class="text-lg md:text-xl text-text-secondary dark:text-dark-text-secondary mb-8 font-body">
                 B.Tech CSE @ VIT Vellore | AI & Robotics Enthusiast
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 py-10 justify-center">
-                <a href="#projects" class="px-8 py-3 border-2 border-primary text-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-black transition">
+                <a href="#projects" class="px-8 py-3 border-2 border-primary text-primary dark:border-dark-primary dark:text-dark-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-white dark:hover:bg-dark-primary dark:hover:text-black transition shadow-sm">
                     View Projects
                 </a>
-                <a href="#contact" class="px-8 py-3 border-2 border-primary text-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-black transition">
+                <a href="#contact" class="px-8 py-3 border-2 border-primary text-primary dark:border-dark-primary dark:text-dark-primary font-heading font-semibold rounded-md hover:bg-primary hover:text-white dark:hover:bg-dark-primary dark:hover:text-black transition shadow-sm">
                     Get in Touch
                 </a>
             </div>
@@ -202,43 +231,43 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 bg-gray-900">
+    <section id="about" class="py-20 px-4 bg-surface dark:bg-dark-surface">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-12 text-primary">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-12 text-primary dark:text-dark-primary">
                 About Me
             </h2>
             
-            <div class="bg-gray-800 rounded-lg p-8 border border-gray-700">
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+            <div class="bg-background dark:bg-dark-background rounded-lg p-8 border border-border dark:border-dark-border shadow-sm">
+                <p class="text-lg text-text-primary dark:text-dark-text-primary leading-relaxed mb-6">
                     I'm a B.Tech Computer Science student at VIT Vellore with a passion for Artificial Intelligence and Robotics. 
                     I love building practical solutions using technology and am constantly learning new skills to expand my capabilities.
                 </p>
                 
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                <p class="text-lg text-text-primary dark:text-dark-text-primary leading-relaxed mb-6">
                     My journey in tech started with curiosity about how things work, and has evolved into building full-stack applications, 
                     exploring AI/ML concepts, and working on robotics projects. I'm particularly interested in how to combine AI/ML withRobotics
                     and make innovative solutions.
                 </p>
                 
                 <div class="grid md:grid-cols-2 gap-6 mt-8">
-                    <div class="bg-black p-6 rounded-lg border border-primary/30">
-                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary">🎓 Education</h3>
-                        <p class="text-gray-300 font-semibold">B.Tech in Computer Science</p>
-                        <p class="text-gray-400 text-sm">VIT Vellore</p>
-                        <p class="text-gray-500 text-sm mt-2 py-1">2025 - 2029</p>
-                        <p class="text-gray-300 font-semibold">Higher Secondary(CBSE)</p>
-                        <p class="text-gray-400 text-sm">Delhi Public School</p>
-                        <p class="text-gray-500 text-sm mt-2">2024</p>
+                    <div class="bg-surface dark:bg-dark-surface p-6 rounded-lg border border-border dark:border-dark-border shadow-sm">
+                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary dark:text-dark-primary">🎓 Education</h3>
+                        <p class="text-text-primary dark:text-dark-text-primary font-semibold">B.Tech in Computer Science</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">VIT Vellore</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm mt-2 py-1">2025 - 2029</p>
+                        <p class="text-text-primary dark:text-dark-text-primary font-semibold">Higher Secondary(CBSE)</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Delhi Public School</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm mt-2">2024</p>
                     </div>
                     
-                    <div class="bg-black p-6 rounded-lg border border-primary/30">
-                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary">🎯 Experience</h3>
-                        <p class="text-gray-300 font-semibold">RoboVITics (Tech Junior Core)</p>
-                        <p class="text-gray-400 text-sm">AI/ML Core</p>
-                        <p class="text-gray-500 text-sm mt-2 py-1">2025 March</p>
-                        <p class="text-gray-300 font-semibold">TAM The AI/ML Club(Tech Junior Core)</p>
-                        <p class="text-gray-400 text-sm ">AI/ML Core</p>
-                        <p class="text-gray-500 text-sm mt-2">2025 January</p>
+                    <div class="bg-surface dark:bg-dark-surface p-6 rounded-lg border border-border dark:border-dark-border shadow-sm">
+                        <h3 class="text-xl font-semibold font-heading mb-3 text-primary dark:text-dark-primary">🎯 Experience</h3>
+                        <p class="text-text-primary dark:text-dark-text-primary font-semibold">RoboVITics (Tech Junior Core)</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">AI/ML Core</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm mt-2 py-1">2025 March</p>
+                        <p class="text-text-primary dark:text-dark-text-primary font-semibold">TAM The AI/ML Club(Tech Junior Core)</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm ">AI/ML Core</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm mt-2">2025 January</p>
                     </div>
                 </div>
             </div>
@@ -246,104 +275,104 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 px-4">
+    <section id="skills" class="py-20 px-4 bg-background dark:bg-dark-background">
         <div class="max-w-6xl mx-auto">
             <div class="py-5">
-            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary dark:text-dark-primary">
                 Technical Skills
             </h2>
             </div>
             <!-- Rotating Concentric Skills Circles -->
             <div class="relative w-64 h-64 mx-auto mb-12 max-w-full">
                 <!-- Center -->
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary rounded-full flex items-center justify-center z-20 shadow-lg shadow-primary/50">
-                    <span class="text-black font-heading font-bold text-sm">Skills</span>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary dark:bg-dark-primary rounded-full flex items-center justify-center z-20 shadow-lg shadow-primary/20 dark:shadow-dark-primary/20">
+                    <span class="text-white font-heading font-bold text-sm">Skills</span>
                 </div>
                 
                 <!-- Inner Circle -->
-                <div class="skill-orbit absolute top-1/2 left-1/2 w-32 h-32 border-2 border-primary/40 rounded-full">
+                <div class="skill-orbit absolute top-1/2 left-1/2 w-32 h-32 border-2 border-primary/40 dark:border-dark-primary/40 rounded-full">
                     <div class="skill-badge absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-primary text-black rounded-full text-xs font-semibold shadow-lg">Python</span>
+                        <span class="px-3 py-1 bg-primary dark:bg-dark-primary text-white rounded-full text-xs font-semibold shadow-lg">Python</span>
                     </div>
                     <div class="skill-badge absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-primary text-black rounded-full text-xs font-semibold shadow-lg">Django</span>
+                        <span class="px-3 py-1 bg-primary dark:bg-dark-primary text-white rounded-full text-xs font-semibold shadow-lg">Django</span>
                     </div>
                 </div>
                 
                 <!-- Middle Circle -->
-                <div class="skill-orbit-reverse absolute top-1/2 left-1/2 w-48 h-48 border-2 border-accent/30 rounded-full">
+                <div class="skill-orbit-reverse absolute top-1/2 left-1/2 w-48 h-48 border-2 border-accent/30 dark:border-dark-accent/30 rounded-full">
                     <div class="skill-badge absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">React</span>
+                        <span class="px-3 py-1 bg-accent dark:bg-dark-accent text-white rounded-full text-xs font-semibold shadow-lg">React</span>
                     </div>
                     <div class="skill-badge absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">AI/ML</span>
+                        <span class="px-3 py-1 bg-accent dark:bg-dark-accent text-white rounded-full text-xs font-semibold shadow-lg">AI/ML</span>
                     </div>
                     <div class="skill-badge absolute top-1/2 -left-4 transform -translate-y-1/2">
-                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">C</span>
+                        <span class="px-3 py-1 bg-accent dark:bg-dark-accent text-white rounded-full text-xs font-semibold shadow-lg">C</span>
                     </div>
                     <div class="skill-badge absolute top-1/2 -right-4 transform -translate-y-1/2">
-                        <span class="px-3 py-1 bg-accent text-white rounded-full text-xs font-semibold shadow-lg">Git</span>
+                        <span class="px-3 py-1 bg-accent dark:bg-dark-accent text-white rounded-full text-xs font-semibold shadow-lg">Git</span>
                     </div>
                 </div>
                 
                 <!-- Outer Circle -->
-                <div class="skill-orbit-slow absolute top-1/2 left-1/2 w-64 h-64 border-2 border-primary/20 rounded-full">
+                <div class="skill-orbit-slow absolute top-1/2 left-1/2 w-64 h-64 border-2 border-primary/20 dark:border-dark-primary/20 rounded-full">
                     <div class="skill-badge absolute -top-5 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">JavaScript</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">JavaScript</span>
                     </div>
                     <div class="skill-badge absolute -bottom-5 left-1/2 transform -translate-x-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">CSS</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">CSS</span>
                     </div>
                     <div class="skill-badge absolute top-1/4 -left-8 transform -translate-y-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">SQL</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">SQL</span>
                     </div>
                     <div class="skill-badge absolute top-1/4 -right-8 transform -translate-y-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">HTML</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">HTML</span>
                     </div>
                     <div class="skill-badge absolute bottom-1/4 -left-10 transform translate-y-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">C++</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">C++</span>
                     </div>
                     <div class="skill-badge absolute bottom-1/4 -right-10 transform translate-y-1/2">
-                        <span class="px-3 py-1 bg-gray-800 border border-primary text-primary rounded-full text-sm font-semibold">Tailwind</span>
+                        <span class="px-3 py-1 bg-surface dark:bg-dark-surface border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-full text-sm font-semibold shadow-sm">Tailwind</span>
                     </div>
                 </div>
             </div>
-            <p class="text-center text-gray-400 mb-12">Technologies and tools I work with</p>
+            <p class="text-center text-text-secondary dark:text-dark-text-secondary mb-12">Technologies and tools I work with</p>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Frontend -->
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                <div class="bg-surface dark:bg-dark-surface p-6 rounded-lg border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition shadow-sm hover:shadow-md">
                     <div class="text-4xl mb-4">🎨</div>
-                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Frontend Development</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> React.js</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> HTML & CSS</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Tailwind CSS</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Bootstrap</li>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary dark:text-dark-primary">Frontend Development</h3>
+                    <ul class="space-y-2 text-text-primary dark:text-dark-text-primary">
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> React.js</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> HTML & CSS</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Tailwind CSS</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Bootstrap</li>
                     </ul>
                 </div>
 
                 <!-- Backend -->
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                <div class="bg-surface dark:bg-dark-surface p-6 rounded-lg border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition shadow-sm hover:shadow-md">
                     <div class="text-4xl mb-4">⚙️</div>
-                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Backend Development</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Python</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Django</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> SQL</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> C Programming</li>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary dark:text-dark-primary">Backend Development</h3>
+                    <ul class="space-y-2 text-text-primary dark:text-dark-text-primary">
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Python</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Django</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> SQL</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> C Programming</li>
                     </ul>
                 </div>
 
                 <!-- Tools -->
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-primary transition">
+                <div class="bg-surface dark:bg-dark-surface p-6 rounded-lg border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition shadow-sm hover:shadow-md">
                     <div class="text-4xl mb-4">🛠️</div>
-                    <h3 class="text-xl font-bold font-heading mb-4 text-primary">Tools & Technologies</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Git & GitHub</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> AI/ML Basics</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Data Structures (C)</li>
-                        <li class="flex items-center gap-2"><span class="text-primary">▹</span> Linux/Terminal</li>
+                    <h3 class="text-xl font-bold font-heading mb-4 text-primary dark:text-dark-primary">Tools & Technologies</h3>
+                    <ul class="space-y-2 text-text-primary dark:text-dark-text-primary">
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Git & GitHub</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> AI/ML Basics</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Data Structures (C)</li>
+                        <li class="flex items-center gap-2"><span class="text-primary dark:text-dark-primary">▹</span> Linux/Terminal</li>
                     </ul>
                 </div>
             </div>
@@ -351,71 +380,71 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 bg-gray-900">
+    <section id="projects" class="py-20 px-4 bg-surface dark:bg-dark-surface">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading text-center mb-4 text-primary dark:text-dark-primary">
                 Featured Projects
             </h2>
-            <p class="text-center text-gray-400 mb-12">Some things I've built recently</p>
+            <p class="text-center text-text-secondary dark:text-dark-text-secondary mb-12">Some things I've built recently</p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 - Replace with your project -->
-                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
-                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                <div class="bg-background dark:bg-dark-background rounded-lg overflow-hidden border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition group shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent dark:from-dark-primary dark:to-dark-accent flex items-center justify-center text-6xl">
                         🧠
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Alferd - Voice - Asistant</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary dark:group-hover:text-dark-primary transition text-text-primary dark:text-dark-text-primary">Alferd - Voice - Asistant</h3>
+                        <p class="text-text-secondary dark:text-dark-text-secondary mb-4 text-sm">
                             A versatile, open-source voice assistant designed to simplify user interactions and boost productivity with hands-free computing. Alferd is a modular, voice-controlled desktop assistant for Windows. It can automate apps, control system settings, fetch news, play music, take notes, and much more—all with your voice.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Python</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">Python</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://github.com/Lakshya-V/Alferd-Assistant" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                            <a href="https://github.com/Lakshya-V/Alferd-Assistant" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md hover:bg-primary dark:hover:bg-dark-primary hover:text-white dark:hover:text-black transition text-center text-sm font-semibold">
                                 GitHub
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
-                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                <div class="bg-background dark:bg-dark-background rounded-lg overflow-hidden border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition group shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent dark:from-dark-primary dark:to-dark-accent flex items-center justify-center text-6xl">
                         📕
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Rack-Track</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary dark:group-hover:text-dark-primary transition text-text-primary dark:text-dark-text-primary">Rack-Track</h3>
+                        <p class="text-text-secondary dark:text-dark-text-secondary mb-4 text-sm">
                             A modern Library Management System built with Python.Rack-Track is a small local library inventory app: a PyQt5 desktop UI with an SQLite backend. Use it to track books, clients and simple loans locally. The project is intentionally minimal so it's easy to run and extend.  
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Python</span>
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">SQL</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">Python</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">SQL</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://github.com/Lakshya-V/Rack-Track" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                            <a href="https://github.com/Lakshya-V/Rack-Track" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md hover:bg-primary dark:hover:bg-dark-primary hover:text-white dark:hover:text-black transition text-center text-sm font-semibold">
                                 GitHub
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="bg-black rounded-lg overflow-hidden border border-gray-800 hover:border-primary transition group">
-                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center text-6xl">
+                <div class="bg-background dark:bg-dark-background rounded-lg overflow-hidden border border-border dark:border-dark-border hover:border-primary dark:hover:border-dark-primary transition group shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent dark:from-dark-primary dark:to-dark-accent flex items-center justify-center text-6xl">
                         🤖
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary transition">Vent-Vyom</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold font-heading mb-3 group-hover:text-primary dark:group-hover:text-dark-primary transition text-text-primary dark:text-dark-text-primary">Vent-Vyom</h3>
+                        <p class="text-text-secondary dark:text-dark-text-secondary mb-4 text-sm">
                             Still Cooking.....
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">Django</span>
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">HTML/CSS</span>
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">SQL</span>
-                            <span class="px-3 py-1 bg-accent/10 border border-accent text-accent rounded-md text-xs font-semibold">JavaScript</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">Django</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">HTML/CSS</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">SQL</span>
+                            <span class="px-3 py-1 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md text-xs font-semibold">JavaScript</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://github.com/Lakshya-V/Vent-Vyom" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 border border-primary text-primary rounded-md hover:bg-primary hover:text-black transition text-center text-sm font-semibold">
+                            <a href="https://github.com/Lakshya-V/Vent-Vyom" target="_blank" class="flex-1 px-4 py-2 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary text-primary dark:text-dark-primary rounded-md hover:bg-primary dark:hover:bg-dark-primary hover:text-white dark:hover:text-black transition text-center text-sm font-semibold">
                                 GitHub
                             </a>
                         </div>
@@ -427,56 +456,56 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-4">
+    <section id="contact" class="py-20 px-4 bg-background dark:bg-dark-background">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary">
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary dark:text-dark-primary">
                 Get In Touch
             </h2>
-            <p class="text-gray-400 mb-12">Have a question or want to work together?</p>
+            <p class="text-text-secondary dark:text-dark-text-secondary mb-12">Have a question or want to work together?</p>
             
             <div class="flex flex-wrap justify-center gap-8 mb-12">
                 <!-- Email -->
                 <a href="mailto:lakshyavats11@gmail.com" class="flex flex-col items-center gap-3 group">
-                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary dark:group-hover:bg-dark-primary group-hover:scale-110 transition shadow-sm">
                         📧
                     </div>
                     <div>
-                        <p class="text-gray-400 text-sm">Email</p>
-                        <p class="text-primary group-hover:text-accent transition">Contact</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Email</p>
+                        <p class="text-primary dark:text-dark-primary group-hover:text-accent dark:group-hover:text-dark-accent transition">Contact</p>
                     </div>
                 </a>
                 
                 <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/in/lakshya-v/" target="_blank" class="flex flex-col items-center gap-3 group">
-                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary dark:group-hover:bg-dark-primary group-hover:scale-110 transition shadow-sm">
                         💼
                     </div>
                     <div>
-                        <p class="text-gray-400 text-sm">LinkedIn</p>
-                        <p class="text-primary group-hover:text-accent transition">Connect</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">LinkedIn</p>
+                        <p class="text-primary dark:text-dark-primary group-hover:text-accent dark:group-hover:text-dark-accent transition">Connect</p>
                     </div>
                 </a>
                 
                 <!-- GitHub -->
-                <a href="https://github.com/Lakshya-v" target="_blank" class="flex flex-col items-center gap-3 group">
-                    <div class="w-16 h-16 bg-accent/20 border border-accent rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary group-hover:scale-110 transition">
+                <a href="https://github.com/Lakshya-V" target="_blank" class="flex flex-col items-center gap-3 group">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-dark-primary/10 border border-primary dark:border-dark-primary rounded-lg flex items-center justify-center text-3xl group-hover:bg-primary dark:group-hover:bg-dark-primary group-hover:scale-110 transition shadow-sm">
                         💻
                     </div>
                     <div>
-                        <p class="text-gray-400 text-sm">GitHub</p>
-                        <p class="text-primary group-hover:text-accent transition">Follow</p>
+                        <p class="text-text-secondary dark:text-dark-text-secondary text-sm">GitHub</p>
+                        <p class="text-primary dark:text-dark-primary group-hover:text-accent dark:group-hover:text-dark-accent transition">Follow</p>
                     </div>
                 </a>
             </div>
 
-            <p class="text-gray-500 text-sm">Feel free to reach out for collaborations or just a friendly conversation!!</p>
+            <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Feel free to reach out for collaborations or just a friendly conversation!!</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 px-4 border-t border-gray-800 bg-gray-900">
+    <footer class="py-10 px-4 border-t border-border bg-footer dark:bg-dark-footer">
         <div class="max-w-6xl mx-auto text-center">
-            <p class="text-gray-400">Copyright © 2026 Lakshya Vats | Built with HTML, Tailwind CSS & AI assistance.</p>
+            <p class="text-white dark:text-dark-text-primary">Copyright © 2026 Lakshya Vats | Built with HTML, Tailwind CSS & AI assistance.</p>
         </div>
     </footer>
 
@@ -495,6 +524,51 @@
             
             if (!nav.contains(event.target) || (nav.contains(event.target) && !button && menu.classList.contains('active'))) {
                 menu.classList.remove('active');
+            }
+        });
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            const mobileThemeText = document.getElementById('mobile-theme-text');
+            
+            if (html.classList.contains('dark')) {
+                // Switch to light mode
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                if (mobileThemeText) mobileThemeText.textContent = 'Dark Mode';
+            } else {
+                // Switch to dark mode
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                if (mobileThemeText) mobileThemeText.textContent = 'Light Mode';
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const html = document.documentElement;
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            const mobileThemeText = document.getElementById('mobile-theme-text');
+            
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                if (mobileThemeText) mobileThemeText.textContent = 'Light Mode';
+            } else {
+                html.classList.remove('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                if (mobileThemeText) mobileThemeText.textContent = 'Dark Mode';
             }
         });
     </script>
